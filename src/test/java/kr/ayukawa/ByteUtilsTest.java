@@ -128,31 +128,6 @@ class ByteUtilsTest {
 	}
 
 	@Test
-	void byte배열을_char로_변환시_null이_전달되면_예외() {
-		try {
-			ByteUtils.toChar(null);
-			fail();
-		} catch(IllegalArgumentException e) {}
-	}
-
-	@Test
-	void byte배열을_char로_변환시_length가_2미만이면_예외() {
-		try {
-			ByteUtils.toChar(new byte[] {});
-			fail();
-		} catch(IllegalArgumentException e) {}
-	}
-
-	@Test
-	void byte배열을_char로_변환() {
-		byte[] data = new byte[] {
-				0b0000_0000, 0b0100_0001
-		};
-		char result = ByteUtils.toChar(data);
-		assertEquals(result, 'A');
-	}
-
-	@Test
 	void byte배열을_short로_변환시_null이_전달되면_예외() {
 		try {
 			ByteUtils.toShort(null);
@@ -178,6 +153,41 @@ class ByteUtilsTest {
 	}
 
 	@Test
+	void byte_열을_short로_변환() {
+		assertEquals(ByteUtils.toShort((byte)0b01111111, (byte)0xff), Short.MAX_VALUE);
+	}
+
+	@Test
+	void byte배열을_char로_변환시_null이_전달되면_예외() {
+		try {
+			ByteUtils.toChar(null);
+			fail();
+		} catch(IllegalArgumentException e) {}
+	}
+
+	@Test
+	void byte배열을_char로_변환시_length가_2미만이면_예외() {
+		try {
+			ByteUtils.toChar(new byte[] {});
+			fail();
+		} catch(IllegalArgumentException e) {}
+	}
+
+	@Test
+	void byte배열을_char로_변환() {
+		byte[] data = new byte[] {
+				0b0000_0000, 0b0100_0001
+		};
+		char result = ByteUtils.toChar(data);
+		assertEquals(result, 'A');
+	}
+
+	@Test
+	void byte_열을_char로_변환() {
+		assertEquals(ByteUtils.toChar((byte)0b0000_0000, (byte)0b0100_0001), 'A');
+	}
+
+	@Test
 	void byte배열을_int로_변환시_null이_전달되면_예외() {
 		try {
 			ByteUtils.toInt(null);
@@ -198,6 +208,11 @@ class ByteUtilsTest {
 		byte[] data = new byte[] { (byte)0b0111_1111, (byte)0xff, (byte)0xff, (byte)0xff};
 		int result = ByteUtils.toInt(data);
 		assertEquals(result, Integer.MAX_VALUE);
+	}
+
+	@Test
+	void byte_열을_int로_변환() {
+		assertEquals(ByteUtils.toInt((byte)0b0111_1111, (byte)0xff, (byte)0xff, (byte)0xff), Integer.MAX_VALUE);
 	}
 
 	@Test
@@ -228,6 +243,23 @@ class ByteUtilsTest {
 	}
 
 	@Test
+	void byte_열을_long으로_변환() {
+		assertEquals(
+				ByteUtils.toLong(
+						(byte)0b0111_1111,
+						(byte)0xff,
+						(byte)0xff,
+						(byte)0xff,
+						(byte)0xff,
+						(byte)0xff,
+						(byte)0xff,
+						(byte)0xff
+				),
+				Long.MAX_VALUE
+		);
+	}
+
+	@Test
 	void byte배열을_float으로_변환시_null이_전달되면_예외() {
 		try {
 			ByteUtils.toFloat(null);
@@ -253,6 +285,19 @@ class ByteUtilsTest {
 	}
 
 	@Test
+	void byte_열을_float으로_변환() {
+		assertEquals(
+				ByteUtils.toFloat(
+						(byte)0b0111_1111,
+						(byte)0xff,
+						(byte)0xff,
+						(byte)0xff
+				),
+				Float.intBitsToFloat(Integer.MAX_VALUE)
+		);
+	}
+
+	@Test
 	void byte배열을_double로_변환시_null이_전달되면_예외() {
 		try {
 			ByteUtils.toDouble(null);
@@ -275,5 +320,22 @@ class ByteUtilsTest {
 		};
 		double result = ByteUtils.toDouble(data);
 		assertEquals(result, Double.longBitsToDouble(Long.MAX_VALUE));
+	}
+
+	@Test
+	void byte_열을_double로_변환() {
+		assertEquals(
+				ByteUtils.toDouble(
+						(byte)0b0111_1111,
+						(byte)0xff,
+						(byte)0xff,
+						(byte)0xff,
+						(byte)0xff,
+						(byte)0xff,
+						(byte)0xff,
+						(byte)0xff
+				),
+				Double.longBitsToDouble(Long.MAX_VALUE)
+		);
 	}
 }

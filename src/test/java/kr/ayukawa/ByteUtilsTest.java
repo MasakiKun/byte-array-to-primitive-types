@@ -2,6 +2,8 @@ package kr.ayukawa;
 
 import org.junit.jupiter.api.Test;
 
+import java.nio.ByteBuffer;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ByteUtilsTest {

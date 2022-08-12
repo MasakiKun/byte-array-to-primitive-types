@@ -1,5 +1,10 @@
 package kr.ayukawa;
 
+/**
+ * byte array ↔ primitive type 간 변환을 위해 만든 유틸리티 클래스
+ * https://www.daniweb.com/programming/software-development/code/216874/primitive-types-as-byte-arrays 문서를 보고
+ * 이 중 primitive type의 배열은 제외하고 작성하였다.
+ */
 public class ByteUtils {
 	// primitive types to byte array
 
